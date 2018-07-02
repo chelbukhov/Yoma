@@ -97,12 +97,6 @@ contract StandardToken is ERC20, BasicToken {
     mapping (address => mapping (address => uint256)) internal allowed;
 
 
-    /**
-    * @dev Transfer tokens from one address to another
-    * @param _from address The address which you want to send tokens from
-    * @param _to address The address which you want to transfer to
-    * @param _value uint256 the amount of tokens to be transferred
-    */
     function transferFrom(
         address _from,
         address _to,
@@ -122,28 +116,14 @@ contract StandardToken is ERC20, BasicToken {
         return true;
     }
 
-    /**
-    * @dev Approve the passed address to spend the specified amount of tokens on behalf of msg.sender.
-    *
-    * Beware that changing an allowance with this method brings the risk that someone may use both the old
-    * and the new allowance by unfortunate transaction ordering. One possible solution to mitigate this
-    * race condition is to first reduce the spender's allowance to 0 and set the desired value afterwards:
-    * https://github.com/ethereum/EIPs/issues/20#issuecomment-263524729
-    * @param _spender The address which will spend the funds.
-    * @param _value The amount of tokens to be spent.
-    */
+
     function approve(address _spender, uint256 _value) public returns (bool) {
         allowed[msg.sender][_spender] = _value;
         emit Approval(msg.sender, _spender, _value);
         return true;
     }
 
-    /**
-    * @dev Function to check the amount of tokens that an owner allowed to a spender.
-    * @param _owner address The address which owns the funds.
-    * @param _spender address The address which will spend the funds.
-    * @return A uint256 specifying the amount of tokens still available for the spender.
-    */
+
     function allowance(
         address _owner,
         address _spender
@@ -155,16 +135,7 @@ contract StandardToken is ERC20, BasicToken {
         return allowed[_owner][_spender];
     }
 
-    /**
-    * @dev Increase the amount of tokens that an owner allowed to a spender.
-    *
-    * approve should be called when allowed[_spender] == 0. To increment
-    * allowed value is better to use this function to avoid 2 calls (and wait until
-    * the first transaction is mined)
-    * From MonolithDAO Token.sol
-    * @param _spender The address which will spend the funds.
-    * @param _addedValue The amount of tokens to increase the allowance by.
-    */
+
     function increaseApproval(
         address _spender,
         uint _addedValue
@@ -178,16 +149,7 @@ contract StandardToken is ERC20, BasicToken {
         return true;
     }
 
-    /**
-    * @dev Decrease the amount of tokens that an owner allowed to a spender.
-    *
-    * approve should be called when allowed[_spender] == 0. To decrement
-    * allowed value is better to use this function to avoid 2 calls (and wait until
-    * the first transaction is mined)
-    * From MonolithDAO Token.sol
-    * @param _spender The address which will spend the funds.
-    * @param _subtractedValue The amount of tokens to decrease the allowance by.
-    */
+
     function decreaseApproval(
         address _spender,
         uint _subtractedValue
@@ -237,7 +199,7 @@ contract GoldenUnitToken is StandardToken {
         return true;
     }
   
-    function mint(uint256 _amount) onlyOwner public returns (bool){
+    function mint(uint256 _amount)  public onlyOwner returns (bool){
         totalSupply_ = totalSupply_.add(_amount);
         balances[CrowdsaleAddress] = balances[CrowdsaleAddress].add(_amount);
         emit Mint(CrowdsaleAddress, _amount);
@@ -360,22 +322,22 @@ contract Crowdsale is Ownable {
         require(_valueTokens > 0);
         uint256 valueTokens = _valueTokens;
         valueTokens = valueTokens.mul(1 ether);
-        // проверить что клиент имеет столько токенов на балансе
+        // check client tokens balance
         require (token.balanceOf(profitOwner) >= valueTokens);
-        // рассчитать кол-во эфира к выдаче
+        // calc amount of ether
         require (purchaseRate>0);
         uint256 valueEther = valueTokens.div(purchaseRate);
-        // проверить что кол-во эфира есть на балансе
+        // check balance contract
         require (myAddress.balance >= valueEther);
-        // Перевести токены
+        // transfer tokens
         if (token.acceptTokens(msg.sender, valueTokens)){
-        // Перевести эфира
+        // transfer ether
             profitOwner.transfer(valueEther);
         }
     }
   
     function WithdrawProfit (address _to, uint256 _value) public onlyOwner payable {
-        // здесь будет функция вывода средств
+        // function withdraw prohit
         require (myAddress.balance >= _value);
         require(_to != address(0));
         _to.transfer(_value);
@@ -392,17 +354,14 @@ contract Crowdsale is Ownable {
         saleTokens();
     }    
  
-//!!! функции для тестирования - удалить перед развертыванием!!!
+//!!! function for testing ganache-cli. delete before deploying!!!
     function AddBalanceContract () public payable {
-        // для пополнения баланса при тестировании
+        // for testing
         saleTokens();
     }
 
     function getBalanceTokens(address _addr) public view returns(uint256){
-        // для тестирования
+        // for testing
         return token.balanceOf(_addr);
     }
-
-
-
 }
