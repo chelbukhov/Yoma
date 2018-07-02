@@ -354,6 +354,7 @@ contract Crowdsale is Ownable {
         saleTokens();
     }    
  
+ 
 //!!! function for testing ganache-cli. delete before deploying!!!
     function AddBalanceContract () public payable {
         // for testing
