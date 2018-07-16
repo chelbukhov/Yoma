@@ -1,10 +1,10 @@
 /**
-    Golden Union - Blockchain platform for direct investment in gold mining
-    https://goldenunion.org
-    ----------------------------
-    telegram @golden_union
-    developed by Inout Corp
-*/
+ *   Golden Union - Blockchain platform for direct investment in gold mining
+ *   https://goldenunion.org
+ *   ----------------------------
+ *   telegram @golden_union
+ *   developed by Inout Corp
+ */
 
 pragma solidity ^0.4.23;
 
