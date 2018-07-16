@@ -149,6 +149,24 @@ describe('Серия тестов ...', () => {
         assert(cBalance > 99);
         console.log(cBalance);
     });
+
+    it('mint...', async () => {
+        try {
+            await contract.methods.mintTokens(500000).send({
+                from: accounts[0],
+                gas: '1000000'
+            });
+            assert(true) 
+        } catch (error) {
+            assert(false);
+        }
+    });  
+    
+    it('Проверка чеканки токенов...', async () => {
+        let tokenBalance = web3.utils.fromWei(await contract.methods.getBalanceTokens(contract.options.address).call());
+        assert(tokenBalance == 550000);
+        //console.log(tokenBalance);
+    });
 });
 
 
