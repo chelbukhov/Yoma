@@ -30,19 +30,30 @@ https://rinkeby.etherscan.io/address/0x6e2b84c256fcc8641ade53d54fc21a8acfa8c753
 https://rinkeby.etherscan.io/token/0x414E0a49442cEAddd3d5060e1F2Cc45aE18AB33F
 
 
+Yoma7-rinkeby.sol
+убран признак payable с 4-х функций:
+WithdrawProfit
+purchase
+takeTokens
+giveTokens
+https://rinkeby.etherscan.io/tx/0x07df1aabec096e5b54ab39ada354f77109051d2d94f79fe67c128041192ef6f6
+
+контракт:
+https://rinkeby.etherscan.io/address/0xb2d05338bb4e1da29b311bc18440129ee577a7ae#code
+
+токен:
+https://rinkeby.etherscan.io/token/0x976fb26fd30ae3b3fe70e0afbe19bcd1c434c4f2
+
+
+
 
 
 MainNet
 
 транзакция создания контракта
-https://www.etherscan.io/tx/0xb6c726fbaa84f75481c45dce32bc2dc552d5fd4730bb79020736dd55b2e0fb1c
+https://www.etherscan.io/tx/0x98ccf19f12072a3812a81fb74118d037efe6effcda8f675d241bd14818d17896
 
 контракт краудсейла
-https://etherscan.io/address/0x3be99acc6d158b14d5774527ad42629dfdc2100e#code
-
+https://etherscan.io/address/0x2f5e078353e781ef9a9b17c2e8e30d3652d6cb83#code
 контракт токена
-https://etherscan.io/token/0xc1e42f1bd2c4423936132dc1636ace7c5e95aa48
-
-
-ABI
-0000000000000000000000003be99acc6d158b14d5774527ad42629dfdc2100e
+https://etherscan.io/token/0xa37f7405d7d6752acc018b8017896610b1ef3572#code
